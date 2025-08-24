@@ -1,0 +1,95 @@
+.netflix-carousel-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2), transparent);
+  z-index: 100; /* Ensure it's above other content */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  padding-bottom: 5px;
+  pointer-events: none; /* Allow clicks to pass through to elements below */
+}
+
+
+.netflix-carousel-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.netflix-carousel-track {
+  display: flex;
+  padding: 10px 0;
+  transition: transform 0.5s ease;
+  will-change: transform;
+  pointer-events: auto; /* Enable pointer events for the track */
+}
+
+.netflix-carousel-item {
+  flex: 0 0 auto;
+  width: 100px;
+  height: 75px;
+  margin: 0 6px;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: none; /* Removed transition */
+  pointer-events: none; /* Disable pointer events for items */
+}
+
+/* Removed hover effect */
+.netflix-carousel-item:hover {
+  /* No hover effects */
+}
+
+.netflix-carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Changed to contain for SVG images */
+  transition: filter 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.05); /* Light background for SVG visibility */
+  padding: 5px; /* Add padding to prevent SVG from touching borders */
+}
+
+.netflix-carousel-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  color: white;
+  padding: 5px;
+  font-size: 9px;
+  opacity: 1; /* Always visible */
+  transition: none; /* Removed transition */
+}
+
+/* Removed hover effect */
+.netflix-carousel-item:hover .netflix-carousel-overlay {
+  /* No hover effects */
+}
+
+/* Animation for the carousel */
+@keyframes carouselScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-170px * 7)); /* Width of item + margin × number of items */
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .netflix-carousel-container {
+    height: 80px;
+  }
+  
+  .netflix-carousel-item {
+    width: 80px;
+    height: 60px;
+  }
+}

@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* index.css - 2025 Modern UI Update */
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+:root {
+  /* 2025 Color Palette - Modern UI Trends */
+  --color-1: 340 85% 60%; /* Vibrant rose */
+  --color-2: 270 85% 65%; /* Rich purple */
+  --color-3: 45 90% 60%; /* Amber gold */
+  --color-4: 190 85% 55%; /* Teal */
+  --color-5: 150 85% 50%; /* Emerald */
+  --speed: 2s;
+  
+  /* Base colors - Ethereal Blues 2025 */
+  --background: 210 30% 98%;
+  --foreground: 222.2 84% 4.9%;
+  
+  /* Primary brand color - Ethereal Blue */
+  --primary: 210 90% 65%;
+  --primary-foreground: 210 40% 98%;
+  
+  /* Secondary colors - Warm Yellow */
+  --secondary: 45 85% 60%;
+  --secondary-foreground: 45 10% 20%;
+  
+  /* Accent colors - Creamy Pastel */
+  --accent: 25 30% 94%;
+  --accent-foreground: 25 40% 20%;
+  
+  /* Muted colors - Moonlit Grey */
+  --muted: 220 20% 94%;
+  --muted-foreground: 220 10% 40%;
+  
+  /* Card colors - Morphism Effect Base */
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --card-shadow: 220 60% 50%;
+  --card-glow: 210 100% 60%;
+  
+  /* Border colors - Subtle Ethereal */
+  --border: 210 30% 90%;
+  
+  /* Input colors - Interactive Elements */
+  --input: 214.3 31.8% 91.4%;
+  
+  /* Ring colors for focus states - Vibrant Highlight */
+  --ring: 210 90% 60%;
+  
+  /* 2025 Deeply Rich Red */
+  --rich-red: 355 80% 40%;
+  --rich-red-light: 355 80% 60%;
+  
+  /* 2025 Burnt Orange */
+  --burnt-orange: 25 90% 50%;
+  --burnt-orange-light: 25 90% 65%;
+}

@@ -1,0 +1,26 @@
+﻿
+
+StatusCode        : 200
+StatusDescription : OK
+Content           : [{"code":"CSE470","hasAvailableSeats":true,"name":"CSE470","totalAvailableSeats":50},{"code":"CHE101","ha
+                    sAvailableSeats":true,"name":"CHE101","totalAvailableSeats":82},{"code":"MAT215","hasAvailableS...
+RawContent        : HTTP/1.0 200 OK
+                    Access-Control-Allow-Origin: *
+                    Content-Length: 38240
+                    Content-Type: application/json
+                    Date: Sat, 16 Aug 2025 03:46:45 GMT
+                    Server: Werkzeug/2.0.1 Python/3.13.6
+                    
+                    [{"code":"CSE470","...
+Forms             : {}
+Headers           : {[Access-Control-Allow-Origin, *], [Content-Length, 38240], [Content-Type, application/json], [Date, 
+                    Sat, 16 Aug 2025 03:46:45 GMT]...}
+Images            : {}
+InputFields       : {}
+Links             : {}
+ParsedHtml        : System.__ComObject
+RawContentLength  : 38240
+
+
+
+

@@ -1,0 +1,11 @@
+{
+  "name": "routinez",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "build": "cd USIS/usis-frontend && npm install && npm run build"
+  },
+  "engines": {
+    "node": "22.x"
+  }
+}

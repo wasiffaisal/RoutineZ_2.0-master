@@ -1,0 +1,202 @@
+/* Modern Typography Styles for 2025 UI Design */
+
+:root {
+  /* Font family variables */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Clash Display', 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  /* Font size variables with fluid typography */
+  --fs-mega: clamp(3.5rem, 8vw, 7rem);  /* Hero text */
+  --fs-h1: clamp(2.5rem, 5vw, 4rem);    /* Main headings */
+  --fs-h2: clamp(2rem, 4vw, 3rem);      /* Section headings */
+  --fs-h3: clamp(1.5rem, 3vw, 2.25rem);  /* Sub-section headings */
+  --fs-h4: clamp(1.25rem, 2vw, 1.75rem); /* Card headings */
+  --fs-h5: clamp(1.125rem, 1.5vw, 1.5rem); /* Small headings */
+  --fs-h6: clamp(1rem, 1.25vw, 1.25rem);  /* Mini headings */
+  --fs-body: clamp(1rem, 1.1vw, 1.125rem); /* Body text */
+  --fs-small: clamp(0.875rem, 0.9vw, 1rem); /* Small text */
+  --fs-xs: clamp(0.75rem, 0.8vw, 0.875rem); /* Extra small text */
+  
+  /* Line height variables */
+  --lh-tight: 1.1;
+  --lh-normal: 1.5;
+  --lh-loose: 1.8;
+  
+  /* Letter spacing variables */
+  --ls-tight: -0.02em;
+  --ls-normal: 0;
+  --ls-wide: 0.05em;
+  --ls-wider: 0.1em;
+}
+
+/* Big Typography Classes */
+.text-mega {
+  font-family: var(--font-display);
+  font-size: var(--fs-mega);
+  line-height: var(--lh-tight);
+  font-weight: 800;
+  letter-spacing: var(--ls-tight);
+  background: linear-gradient(to right, var(--color-ethereal-blue), var(--color-warm-yellow));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 0.5em;
+}
+
+.text-mega-outline {
+  font-family: var(--font-display);
+  font-size: var(--fs-mega);
+  line-height: var(--lh-tight);
+  font-weight: 800;
+  letter-spacing: var(--ls-tight);
+  -webkit-text-stroke: 2px var(--color-ethereal-blue);
+  color: transparent;
+  margin-bottom: 0.5em;
+}
+
+/* Heading Typography */
+h1, .h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-tight);
+  font-weight: 700;
+  letter-spacing: var(--ls-tight);
+  margin-bottom: 0.5em;
+}
+
+h2, .h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-tight);
+  font-weight: 700;
+  letter-spacing: var(--ls-tight);
+  margin-bottom: 0.5em;
+}
+
+h3, .h3 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-tight);
+  font-weight: 600;
+  letter-spacing: var(--ls-tight);
+  margin-bottom: 0.5em;
+}
+
+h4, .h4 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-h4);
+  line-height: var(--lh-normal);
+  font-weight: 600;
+  margin-bottom: 0.5em;
+}
+
+h5, .h5 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-h5);
+  line-height: var(--lh-normal);
+  font-weight: 600;
+  margin-bottom: 0.5em;
+}
+
+h6, .h6 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-h6);
+  line-height: var(--lh-normal);
+  font-weight: 600;
+  margin-bottom: 0.5em;
+}
+
+/* Body Typography */
+p, .text-body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  margin-bottom: 1em;
+}
+
+.text-lead {
+  font-family: var(--font-sans);
+  font-size: calc(var(--fs-body) * 1.2);
+  line-height: var(--lh-normal);
+  margin-bottom: 1.5em;
+}
+
+.text-small {
+  font-family: var(--font-sans);
+  font-size: var(--fs-small);
+  line-height: var(--lh-normal);
+}
+
+.text-xs {
+  font-family: var(--font-sans);
+  font-size: var(--fs-xs);
+  line-height: var(--lh-normal);
+}
+
+/* Monospace Typography */
+.text-mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  line-height: var(--lh-normal);
+}
+
+/* Emoticon Typography */
+.text-emoticon {
+  font-size: 1.5em;
+  vertical-align: middle;
+  line-height: 1;
+  display: inline-block;
+}
+
+.emoticon-large {
+  font-size: 2.5em;
+}
+
+/* Typography Utilities */
+.text-gradient {
+  background: linear-gradient(to right, var(--color-ethereal-blue), var(--color-warm-yellow));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-reverse {
+  background: linear-gradient(to right, var(--color-warm-yellow), var(--color-burnt-orange));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-outline {
+  -webkit-text-stroke: 1px var(--color-foreground);
+  color: transparent;
+}
+
+.text-glow {
+  text-shadow: 0 0 10px var(--color-ethereal-blue-glow);
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wide);
+}
+
+.text-spaced {
+  letter-spacing: var(--ls-wider);
+}
+
+.text-tight {
+  letter-spacing: var(--ls-tight);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  :root {
+    --fs-mega: clamp(2.5rem, 10vw, 4rem);
+  }
+  
+  .text-mega-outline {
+    -webkit-text-stroke: 1px var(--color-ethereal-blue);
+  }
+}

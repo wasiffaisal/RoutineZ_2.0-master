@@ -1,0 +1,174 @@
+/* Text Transition Component Styles */
+
+.text-transition-container {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  --transition-duration: 800ms;
+}
+
+.text-transition {
+  display: inline-block;
+  transition-property: opacity, transform, filter;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: ease-in-out;
+}
+
+/* Spring physics effect */
+.text-transition-spring {
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Fade animation */
+.text-transition-fade.animating {
+  opacity: 0;
+}
+
+/* Slide animation */
+.text-transition-slide {
+  transform: translateY(0);
+}
+
+.text-transition-slide.animating {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+/* Blur animation */
+.text-transition-blur {
+  filter: blur(0);
+}
+
+.text-transition-blur.animating {
+  filter: blur(8px);
+  opacity: 0;
+}
+
+/* Scale animation */
+.text-transition-scale {
+  transform: scale(1);
+}
+
+.text-transition-scale.animating {
+  transform: scale(0.5);
+  opacity: 0;
+}
+
+/* Typewriter animation */
+.text-transition-typewriter-text {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.text-transition-cursor {
+  display: inline-block;
+  margin-left: 2px;
+  animation: cursor-blink 1s infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Wave animation */
+.text-transition-wave-container {
+  display: inline-block;
+}
+
+.text-transition-wave-char {
+  display: inline-block;
+  animation: wave-animation calc(var(--transition-duration) * 1.5) ease-in-out infinite;
+  animation-delay: calc(var(--char-index) * 0.05s);
+  transform-origin: bottom;
+}
+
+@keyframes wave-animation {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Text transition showcase styles */
+.text-transition-showcase {
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: var(--card-background);
+  box-shadow: var(--shadow-elevation-medium);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.text-transition-demo {
+  padding: 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0.75rem;
+  background-color: var(--card-background-lighter);
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-transition-title {
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--color-foreground);
+}
+
+.text-transition-description {
+  font-size: var(--fs-body);
+  color: var(--color-foreground-muted);
+  margin-bottom: 1.5rem;
+}
+
+/* Gradient text transitions */
+.text-gradient-transition {
+  background-size: 200% 200%;
+  background-position: left center;
+  transition: background-position var(--transition-duration) ease;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(
+    to right,
+    var(--color-ethereal-blue),
+    var(--color-warm-yellow),
+    var(--color-burnt-orange),
+    var(--color-ethereal-blue)
+  );
+}
+
+.text-gradient-transition.animating {
+  background-position: right center;
+}
+
+/* 3D text transitions */
+.text-3d-transition {
+  transform: perspective(1000px) rotateX(0) rotateY(0);
+  transition: transform var(--transition-duration) ease;
+}
+
+.text-3d-transition.animating {
+  transform: perspective(1000px) rotateX(90deg) rotateY(15deg);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .text-transition-wave-char {
+    animation-duration: calc(var(--transition-duration) * 1.2);
+  }
+  
+  .text-transition-demo {
+    padding: 1rem;
+    min-height: 60px;
+  }
+}

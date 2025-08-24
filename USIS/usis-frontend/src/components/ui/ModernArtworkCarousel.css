@@ -1,0 +1,172 @@
+.modern-artwork-carousel {
+  width: 100%;
+  max-width: 1200px; /* Further increased maximum width for larger artwork */
+  height: 240px; /* Further increased height for larger artwork */
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background: transparent;
+  margin: 0 auto 20px auto; /* Increased bottom margin */
+  position: relative;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  padding: 10px 0; /* Increased padding */
+}
+
+.modern-artwork-carousel::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.modern-artwork-track {
+  display: flex;
+  padding: 5px 0;
+  will-change: transform;
+  animation: modernCarouselScroll 45s linear infinite; /* Slower animation for better visibility */
+  justify-content: center; /* Center the items */
+}
+
+.modern-artwork-item {
+  flex: 0 0 auto;
+  width: 300px; /* Further increased width for larger artwork */
+  height: 200px; /* Further increased height for larger artwork */
+  margin: 0 15px; /* Increased margin for better spacing */
+  border-radius: 14px; /* Increased border radius for modern look */
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(20px);
+  opacity: 0;
+  animation: fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; /* Smoother animation */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Brighter border */
+  transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), /* Modern smooth easing */
+              box-shadow 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+              z-index 0.3s ease;
+}
+
+.modern-artwork-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Changed to contain for SVG images */
+  transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), /* Modern smooth easing */
+               filter 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  filter: brightness(1.2) contrast(1.3) saturate(1.15); /* Enhanced colors */
+  border: 1px solid rgba(255, 255, 255, 0.25); /* Brighter border */
+  background-color: rgba(255, 255, 255, 0.05); /* Light background for SVG visibility */
+  padding: 10px; /* Add padding to prevent SVG from touching borders */
+}
+
+.modern-artwork-item:hover .modern-artwork-image {
+  transform: scale(1.05);
+}
+
+.modern-artwork-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.6), transparent); /* Enhanced gradient for better text visibility */
+  color: white;
+  padding: 20px 12px 15px; /* Increased padding for better text spacing */
+  font-size: 16px; /* Increased font size for better readability */
+  opacity: 1; /* Always visible */
+  transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); /* Modern smooth easing */
+  text-align: center; /* Center text for better alignment */
+  transform: translateY(0); /* Starting position */
+}
+
+.modern-artwork-item:hover .modern-artwork-overlay {
+  opacity: 1;
+}
+
+.modern-artwork-title {
+  font-weight: 600;
+  font-size: 16px; /* Increased font size */
+  display: block;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9), 0 0 8px rgba(0, 0, 0, 0.6); /* Enhanced text shadow for better readability */
+  letter-spacing: 0.8px; /* Increased letter spacing */
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Hide overflow text */
+  text-overflow: ellipsis; /* Add ellipsis for overflow text */
+  transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); /* Modern smooth easing */
+}
+
+/* Animation for the carousel */
+@keyframes modernCarouselScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-315px * 8)); /* Updated width of item + margin × number of items */
+  }
+}
+
+/* Modern hover effect with smooth transitions */
+.modern-artwork-item:hover {
+  transform: translateY(-12px) scale(1.05); /* Enhanced lift and scale effect */
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 0, 0, 0.25); /* Enhanced shadow for depth */
+  z-index: 20; /* Higher z-index to ensure it appears above other items */
+}
+
+.modern-artwork-item:hover .modern-artwork-image {
+  transform: scale(1.12); /* Increased scale for more dramatic effect */
+  filter: brightness(1.35) contrast(1.35) saturate(1.2); /* Enhanced colors */
+}
+
+.modern-artwork-item:hover .modern-artwork-overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2)); /* Darker gradient on hover */
+  padding-bottom: 15px; /* Slightly increased padding on hover */
+}
+
+.modern-artwork-item:hover .modern-artwork-title {
+  transform: translateY(-2px); /* Slight upward movement on hover */
+}
+
+/* Animation for fade in up effect */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .modern-artwork-carousel {
+    height: 160px; /* Increased height for mobile */
+    max-width: 100%;
+  }
+  
+  .modern-artwork-item {
+    width: 180px; /* Increased width for mobile */
+    height: 120px; /* Increased height for mobile */
+    margin: 0 10px;
+  }
+  
+  .modern-artwork-title {
+    font-size: 14px; /* Increased font size for mobile */
+  }
+}
+
+/* Additional responsive adjustments for very small screens */
+@media (max-width: 480px) {
+  .modern-artwork-carousel {
+    height: 130px;
+  }
+  
+  .modern-artwork-item {
+    width: 150px;
+    height: 100px;
+  }
+  
+  .modern-artwork-overlay {
+    padding: 15px 10px 12px;
+  }
+  
+  .modern-artwork-title {
+    font-size: 13px;
+  }
+}

@@ -1,0 +1,97 @@
+/* Interactive 3D Artwork Component Styles */
+
+.artwork-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+
+.artwork-container:hover {
+  z-index: 10;
+}
+
+/* Floating animation for subtle movement */
+.artwork-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Shimmer effect for artwork */
+.artwork-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.artwork-shimmer::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  animation: shimmer 6s infinite;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) rotate(30deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(30deg);
+  }
+}
+
+/* Ethereal glow effects */
+.artwork-ethereal-blue {
+  box-shadow: 0 0 15px rgba(33, 150, 243, 0.3), 0 0 30px rgba(33, 150, 243, 0.2);
+}
+
+.artwork-warm-yellow {
+  box-shadow: 0 0 15px rgba(33, 150, 243, 0.3), 0 0 30px rgba(33, 150, 243, 0.2);
+}
+
+.artwork-creamy-pastel {
+  box-shadow: 0 0 15px rgba(255, 241, 230, 0.3), 0 0 30px rgba(255, 241, 230, 0.2);
+}
+
+.artwork-burnt-orange {
+  box-shadow: 0 0 15px rgba(230, 81, 0, 0.3), 0 0 30px rgba(230, 81, 0, 0.2);
+}
+
+/* Depth effect for 3D appearance */
+.artwork-depth {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .artwork-container {
+    transform: none !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  .artwork-shimmer::after {
+    display: none;
+  }
+}
