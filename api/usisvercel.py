@@ -218,7 +218,7 @@ sse_clients = set()
 
 def load_data():
     try:
-        DATA_URL = "https://bracu-connect-rg-hchcffasd6gnahdt.southeastasia-01.azurewebsites.net/raw-schedule"  # Using Vercel deployment
+        DATA_URL = "https://usis-cdn.eniamza.com/connect.json"  # Using Vercel deployment
         debugprint(f"\n=== Loading Fresh Data from {DATA_URL} ===")
         
         # Add retry logic
