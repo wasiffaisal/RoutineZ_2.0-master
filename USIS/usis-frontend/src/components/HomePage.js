@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronRight, BookOpen, Calendar, Users, Zap, ArrowRight } from 'lucide-react';
-import ModernArtworkGrid from './ui/ModernArtworkGrid';
+// import ModernArtworkGrid from './ui/ModernArtworkGrid'; // Hidden - user requested to turn off art section
 import './HomePage.css';
 
 const HomePage = ({ onNavigate }) => {
@@ -138,15 +138,7 @@ const HomePage = ({ onNavigate }) => {
         </div>
       </div>
 
-      <div className="artwork-section">
-        <div className="artwork-header">
-          <h2 className="artwork-title">Featured Artwork</h2>
-          <p className="artwork-subtitle">
-            Discover stunning digital art created by talented student artists
-          </p>
-        </div>
-        <ModernArtworkGrid />
-      </div>
+      {/* Artwork section hidden - user requested to turn off art section */}
 
       <footer className="professional-footer">
         <div className="footer-content">
