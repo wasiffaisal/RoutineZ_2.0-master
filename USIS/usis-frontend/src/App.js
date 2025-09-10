@@ -8,7 +8,7 @@ import SeatStatusDialog from "./SeatStatusDialog";
 import { MessageCircle } from 'lucide-react';
 import { API_BASE } from './config';
 import ApiStatus from './components/ApiStatus';
-import ModernArtworkGrid from './components/ui/ModernArtworkGrid';
+// import ModernArtworkGrid from './components/ui/ModernArtworkGrid'; // Hidden - user requested to turn off art section
 
 const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const TIME_SLOTS = [
@@ -798,17 +798,11 @@ const CourseOption = ({ innerRef, innerProps, data, isSelected }) => (
 
 // --- Make Routine Page ---
 const MakeRoutinePage = () => {
-  // Add greyscale artwork to the routine page
+  // Greyscale artwork disabled - user requested to turn off art section
   React.useEffect(() => {
-    // Add artwork elements dynamically to the routine page
-    const artworkContainer = document.querySelector('.content-container');
-    if (artworkContainer) {
-      const artworkElement = document.createElement('div');
-      artworkElement.className = 'routine-page-artwork';
-      artworkContainer.appendChild(artworkElement);
-    }
+    // Skip adding artwork elements dynamically
     return () => {
-      // Clean up when component unmounts
+      // Clean up any existing artwork elements
       const artworkElement = document.querySelector('.routine-page-artwork');
       if (artworkElement) {
         artworkElement.remove();
@@ -3177,7 +3171,7 @@ function App() {
           </div>
         </div>
 
-      <ModernArtworkGrid />
+      {/* ModernArtworkGrid hidden - user requested to turn off art section */}
       <Footer />
     </div>
   );
