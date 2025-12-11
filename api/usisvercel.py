@@ -80,7 +80,7 @@ def check_ai_availability():
 def check_connapi_status():
     try:
         # Use a simpler approach - just check if the API is reachable
-        response = requests.get("https://connect.routinez.app/raw-schedule", timeout=10)
+        response = requests.get("https://connect-api.md-wasif-faisal.workers.dev/raw-schedule", timeout=10)
         
         # If we can reach the API, consider it online regardless of content
         if response.status_code == 200:
@@ -218,7 +218,7 @@ sse_clients = set()
 
 def load_data():
     try:
-        DATA_URL = "https://connect.routinez.app/raw-schedule"  # Using Vercel deployment
+        DATA_URL = "https://connect-api.md-wasif-faisal.workers.dev/raw-schedule"  # Using Vercel deployment
         debugprint(f"\n=== Loading Fresh Data from {DATA_URL} ===")
         
         # Add retry logic
