@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import axios from 'axios';
 import { API_BASE } from './config';
 import { formatTime12Hour } from './App';
-import { Search, X, AlertCircle } from 'lucide-react';
+import { Search, X, AlertCircle, Filter } from 'lucide-react';
 
 // Modern UI Components
 const Card = ({ children, className = '' }) => (
@@ -41,6 +41,9 @@ const SeatStatusPage = () => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [activeSuggestion, setActiveSuggestion] = useState(0);
   const [isConnected, setIsConnected] = useState(false);
+  const [facultyFilter, setFacultyFilter] = useState('');
+  const [showFacultyDropdown, setShowFacultyDropdown] = useState(false);
+  const facultyDropdownRef = useRef(null);
 
   const abortControllerRef = useRef(null);
   const eventSourceRef = useRef(null);
@@ -164,6 +167,7 @@ const SeatStatusPage = () => {
   const handleCourseChange = (courseCode) => {
     setSelectedCourse(courseCode);
     setSearchTerm('');
+    setFacultyFilter('');
     if (courseCode) {
       fetchSections(courseCode);
     } else {
@@ -175,6 +179,7 @@ const SeatStatusPage = () => {
     setSelectedCourse(course.code);
     setSearchTerm(course.code);
     setShowSuggestions(false);
+    setFacultyFilter('');
     fetchSections(course.code);
   };
 
@@ -204,7 +209,45 @@ const SeatStatusPage = () => {
     course.title?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // Extract unique faculty names from sections
+  const uniqueFaculties = useMemo(() => {
+    const faculties = new Set();
+    sections.forEach(section => {
+      if (section.faculties) {
+        // Handle multiple faculty names separated by comma
+        const facultyNames = section.faculties.split(',').map(f => f.trim());
+        facultyNames.forEach(f => {
+          if (f && f !== 'TBA') faculties.add(f);
+        });
+      }
+    });
+    return Array.from(faculties).sort();
+  }, [sections]);
+
+  // Filter sections by faculty
+  const filteredSections = useMemo(() => {
+    if (!facultyFilter) return sections;
+    return sections.filter(section => {
+      if (!section.faculties) return false;
+      return section.faculties.toLowerCase().includes(facultyFilter.toLowerCase());
+    });
+  }, [sections, facultyFilter]);
+
   const hasAvailableSeats = sections.some(item => item.availableSeats > 0);
+
+  // Close faculty dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (facultyDropdownRef.current && !facultyDropdownRef.current.contains(event.target)) {
+        setShowFacultyDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
@@ -299,7 +342,53 @@ const SeatStatusPage = () => {
               </div>
             </div>
 
-
+            {/* Faculty Filter */}
+            <div className="md:col-span-1">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                Filter by Faculty
+              </label>
+              <div className="relative" ref={facultyDropdownRef}>
+                <button
+                  onClick={() => setShowFacultyDropdown(!showFacultyDropdown)}
+                  disabled={!selectedCourse || sections.length === 0}
+                  className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-indigo-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed text-left flex items-center justify-between"
+                >
+                  <span className={facultyFilter ? 'text-slate-900 dark:text-slate-100' : 'text-slate-400'}>
+                    {facultyFilter || 'All Faculty'}
+                  </span>
+                  <Filter className="w-4 h-4 text-slate-400" />
+                </button>
+                {showFacultyDropdown && uniqueFaculties.length > 0 && (
+                  <div className="absolute z-10 w-full mt-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                    <div
+                      className="px-4 py-2 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700 text-sm text-slate-600 dark:text-slate-400 font-medium border-b border-slate-200 dark:border-slate-600"
+                      onClick={() => {
+                        setFacultyFilter('');
+                        setShowFacultyDropdown(false);
+                      }}
+                    >
+                      All Faculty
+                    </div>
+                    {uniqueFaculties.map((faculty) => (
+                      <div
+                        key={faculty}
+                        className={`px-4 py-2 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700 text-sm ${
+                          facultyFilter === faculty
+                            ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300'
+                            : 'text-slate-900 dark:text-slate-100'
+                        }`}
+                        onClick={() => {
+                          setFacultyFilter(faculty);
+                          setShowFacultyDropdown(false);
+                        }}
+                      >
+                        {faculty}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
 
           <div className="flex items-center justify-between mt-4">
@@ -352,23 +441,42 @@ const SeatStatusPage = () => {
             {/* Summary Card */}
             {selectedCourse && sections.length > 0 && (
               <Card className="mb-8 border-slate-200 dark:border-slate-700">
-                <div className="pt-6 px-6">
+                <div className="pt-6 px-6 pb-4">
                   <div className="flex items-center justify-between">
                     <div>
                       <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
                         {selectedCourse}
+                        {facultyFilter && (
+                          <span className="text-lg font-normal text-indigo-600 dark:text-indigo-400 ml-2">
+                            • {facultyFilter}
+                          </span>
+                        )}
                       </h3>
                       <p className="text-slate-600 dark:text-slate-400">
-                        {sections.length} section{sections.length !== 1 ? 's' : ''} available
+                        {facultyFilter 
+                          ? `${filteredSections.length} of ${sections.length} section${sections.length !== 1 ? 's' : ''} shown`
+                          : `${sections.length} section${sections.length !== 1 ? 's' : ''} available`
+                        }
                       </p>
                     </div>
                     <div className="text-right">
                       <div className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
-                        {sections.reduce((total, section) => total + (section.availableSeats || 0), 0)}
+                        {filteredSections.reduce((total, section) => total + (section.availableSeats || 0), 0)}
                       </div>
                       <div className="text-sm text-slate-600 dark:text-slate-400">Total Available Seats</div>
                     </div>
                   </div>
+                  {facultyFilter && (
+                    <div className="mt-3">
+                      <button
+                        onClick={() => setFacultyFilter('')}
+                        className="inline-flex items-center px-3 py-1 text-sm bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-full hover:bg-indigo-200 dark:hover:bg-indigo-900/50 transition-colors"
+                      >
+                        <X className="w-3 h-3 mr-1" />
+                        Clear filter: {facultyFilter}
+                      </button>
+                    </div>
+                  )}
                 </div>
               </Card>
             )}
@@ -402,7 +510,22 @@ const SeatStatusPage = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                  {sections
+                  {filteredSections.length === 0 && facultyFilter ? (
+                    <tr>
+                      <td colSpan="7" className="px-6 py-8 text-center">
+                        <div className="text-slate-500 dark:text-slate-400">
+                          <Filter className="w-8 h-8 mx-auto mb-2 opacity-50" />
+                          <p>No sections found for faculty: <strong>{facultyFilter}</strong></p>
+                          <button
+                            onClick={() => setFacultyFilter('')}
+                            className="mt-2 text-indigo-600 dark:text-indigo-400 hover:underline text-sm"
+                          >
+                            Clear filter
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ) : filteredSections
                     .slice()
                     .sort((a, b) => (a.sectionName || '').localeCompare(b.sectionName || ''))
                     .map((section) => (
